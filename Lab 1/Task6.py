@@ -1,6 +1,6 @@
 import cv2
 
-def Task6(path):
+def Task6():
     video = cv2.VideoCapture(0)
     color = (0, 0, 255)
     cv2.namedWindow("Red Cross", cv2.WINDOW_NORMAL)
@@ -23,17 +23,4 @@ def Task6(path):
     video.release()
     cv2.destroyAllWindows()
 
-
-
-
-
-    # frame = cv2.imread(path)
-    # cv2.namedWindow('HSV', cv2.WINDOW_FREERATIO)
-    # cv2.namedWindow('not HSV', cv2.WINDOW_FREERATIO)
-    # hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
-    # cv2.imshow('not HSV', frame)
-    # cv2.imshow('HSV', hsv)
-    # cv2.waitKey(0)
-    # cv2.destroyAllWindows()
-
-Task6('D:/cat.jpg')
+Task6()

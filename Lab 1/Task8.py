@@ -1,15 +1,15 @@
 import cv2
 
-def RGB_Color(pixel):
+def RGB_Color(pixel): # Так как BGR
     r = pixel[0]
     g = pixel[1]
     b = pixel[2]
     if r > g and r > b:
-        return (0, 0, 255)  # красный
+        return (0, 0, 255)
     elif g > r and g > b:
-        return (0, 255, 0)  # зеленый
+        return (0, 255, 0)
     else:
-        return (255, 0, 0)  # синий
+        return (255, 0, 0)
 
 def Task8():
     video = cv2.VideoCapture(0)

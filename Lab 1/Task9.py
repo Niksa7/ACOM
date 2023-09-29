@@ -1,6 +1,6 @@
 import cv2
 
-url = 'http://192.168.0.111:8080/video'
+url = 'http://192.168.0.200:8080/video'
 
 def Task9():
 

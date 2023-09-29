@@ -15,6 +15,6 @@ def Task3(path, scale_x, scale_y, color):
         if cv2.waitKey(1) & 0xFF == 27:
             break
 
-Task3('D:/sample-5s.mp4', 0.5, 0.5, cv2.COLOR_BGR2RGB)
-Task3('D:/cat.jpg', 0.5, 0.5, cv2.COLOR_BGR2RGB)
-Task3('https://media.geeksforgeeks.org/wp-content/uploads/20210314115545/sample-video.mp4', 0.5, 0.5, cv2.COLOR_BGR2RGB)
+Task3('D:/sample-5s.mp4', 0.5, 0.5, cv2.COLOR_BGR2GRAY)
+Task3('D:/cat.jpg', 1, 1, cv2.COLOR_BGR2RGB)
+Task3('https://media.geeksforgeeks.org/wp-content/uploads/20210314115545/sample-video.mp4', 0.2, 0.2, cv2.COLOR_BGR2HSV)
