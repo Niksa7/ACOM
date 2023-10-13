@@ -6,9 +6,9 @@ def gauss(x, y, a, b, sigma):
     part2 = np.exp(-((x-a) ** 2 + (y-b) ** 2) / (2 * sigma ** 2))
     return part1 * part2
 
-def Task1():
+def task1():
 
-    def Gaussian_matrix(size, sigma):
+    def gaussian_matrix(size, sigma):
         sum = 0
         # Исходная матрица
         matrix = np.ones((size, size))
@@ -25,27 +25,19 @@ def Task1():
         return matrix
 
     # Средне квадратичное отклонение
-    sigma = 5
+    sigma = 2
     # Итоговые матрицы
     print(f"Gaussian Kernel of size 3x3:\n")
-    kernel = Gaussian_matrix(3, sigma)
+    kernel = gaussian_matrix(3, sigma)
     print(kernel)
     print("\n")
     print(f"Gaussian Kernel of size 5x5:\n")
-    kernel = Gaussian_matrix(5, sigma)
+    kernel = gaussian_matrix(5, sigma)
     print(kernel)
     print("\n")
     print(f"Gaussian Kernel of size 7x7:\n")
-    kernel = Gaussian_matrix(7, sigma)
+    kernel = gaussian_matrix(7, sigma)
     print(kernel)
     print("\n")
 
-
-
-
-
-
-
-
-
-Task1()
+task1()

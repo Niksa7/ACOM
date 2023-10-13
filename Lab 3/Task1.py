@@ -6,9 +6,9 @@ def gauss(x, y, a, b, sigma):
     part2 = np.exp(-((x-a) ** 2 + (y-b) ** 2) / (2 * sigma ** 2))
     return part1 * part2
 
-def Task1():
+def task1():
 
-    def Gaussian_matrix(size, sigma):
+    def gaussian_matrix(size, sigma):
         # Исходная матрица
         matrix = np.ones((size, size))
         for i in range(size):
@@ -20,24 +20,16 @@ def Task1():
     sigma = 5
     # Итоговые матрицы
     print(f"Gaussian Kernel of size {3}x{3}:\n")
-    kernel = Gaussian_matrix(3, sigma)
+    kernel = gaussian_matrix(3, sigma)
     print(kernel)
     print("\n")
     print(f"Gaussian Kernel of size {5}x{5}:\n")
-    kernel = Gaussian_matrix(5, sigma)
+    kernel = gaussian_matrix(5, sigma)
     print(kernel)
     print("\n")
     print(f"Gaussian Kernel of size {7}x{7}:\n")
-    kernel = Gaussian_matrix(7, sigma)
+    kernel = gaussian_matrix(7, sigma)
     print(kernel)
     print("\n")
 
-
-
-
-
-
-
-
-
-Task1()
+task1()
