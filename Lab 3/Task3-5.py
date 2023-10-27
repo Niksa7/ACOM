@@ -1,10 +1,9 @@
 import cv2 as cv
 import numpy as np
 
+# Функция Гаусса
 def gauss(x, y, a, b, sigma):
-    part1 = 1 / (np.pi * (2 * sigma ** 2))
-    part2 = np.exp(-((x-a) ** 2 + (y-b) ** 2) / (2 * sigma ** 2))
-    return part1 * part2
+    return (1 / (np.pi * (2 * sigma ** 2))) * np.exp(-((x-a) ** 2 + (y-b) ** 2) / (2 * sigma ** 2))
 
 # Нормализированная матрица Гаусса
 def gaussian_matrix(size, sigma):
@@ -35,14 +34,16 @@ def my_gaussian_blur(img, size, sigma):
     Blur_img_cropped = Blur_img[border:-border, border:-border]
     return Blur_img_cropped
 
+# Свертка
 def convolution(img, kernel):
     # Копируем изображение
     Blur_copy = img.copy()
     ksize = len(kernel)
     x0 = ksize // 2
     y0 = ksize // 2
+    # Итерации по внутренним пикселям изображения
     for i in range(x0, Blur_copy.shape[0] - x0):
-        for j in range(x0, Blur_copy.shape[1] - x0):
+        for j in range(y0, Blur_copy.shape[1] - y0):
             val = 0
             for m in range(-(ksize // 2), ksize // 2 + 1):
                 for n in range(-(ksize // 2), ksize // 2 + 1):
@@ -58,14 +59,12 @@ def task1():
 
     sigma = 2.0
     ksize = 15
-    # GausBlur = MyGaussianBlur(img, kernel, sigma)
-    # cv.imshow(str(kernel) + 'x' + str(kernel) + ' and deviation ' + str(sigma), GausBlur)
-    Blur_img = my_gaussian_blur(img, ksize, sigma)
-    cv.imshow('Blur_img ksize = 21 sigma = 11', Blur_img)
+    # Blur_img = my_gaussian_blur(img, ksize, sigma)
+    # cv.imshow(f'Blur_img ksize = {ksize} sigma = {sigma}', Blur_img)
 
     # Задание 4. Доп примеры
-    # Blur_img1 = my_gaussian_blur(img, 31, 7)
-    # cv.imshow('Blur_img ksize = 31 sigma = 7', Blur_img1)
+    Blur_img1 = my_gaussian_blur(img,7, 7)
+    cv.imshow('Blur_img ksize = 31 sigma = 7', Blur_img1)
     #
     # Blur_img2 = my_gaussian_blur(img, 11, 15)
     # cv.imshow('Blur_img ksize = 11 sigma = 15', Blur_img2)
