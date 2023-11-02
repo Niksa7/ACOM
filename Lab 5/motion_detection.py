@@ -30,7 +30,7 @@ def motion_detection(src, output, ksize, sigma, porog, base_area):
 
         # Новый кадр
         ret, next_frame = cap.read()
-
+        
         # Eсли чтение неуспешно, остановить цикл
         if not ret:
             break
