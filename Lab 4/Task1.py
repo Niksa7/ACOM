@@ -59,10 +59,39 @@ def canny(path, ksize, sigma):
     cv.imshow('Values of angles', gradient_angle_matrix.astype(np.uint8))
     print('Значение углов градиентов:\n', gradient_angle_matrix)
 
+    # 3 - TASK
+
+    non_max_suppression = orig_image.copy()
+    for i in range(orig_image.shape[0]):
+        for j in range(orig_image.shape[1]):
+            angle = gradient_angle_matrix[i][j]
+            gradient = gradient_value_matrix[i][j]
+            if (i == 0 or i == orig_image.shape[0] - 1 or j == 0 or j == orig_image.shape[1] - 1):
+                non_max_suppression[i][j] = 0
+            else:
+
+                if np.logical_or(angle == 0, angle == 4).any():
+                    y_shift = 0
+                elif np.logical_and(angle > 0, angle < 4).any():
+                    y_shift = 1
+                else:
+                    y_shift = -1
+
+                if np.logical_or(angle == 2, angle == 6).any():
+                    x_shift = 0
+                elif np.logical_and(angle > 2, angle < 6).any():
+                    x_shift = -1
+                else:
+                    x_shift = 1
+                if (gradient >= gradient_value_matrix[i + x_shift][j + y_shift] and gradient >= gradient_value_matrix[i - x_shift][j - y_shift]):
+                    is_max = True
+                else:
+                    is_max = False
+                non_max_suppression[i][j] = 255 if is_max else 0
+    cv.imshow('Non Max Suppression', non_max_suppression)
 
 
-
-
+    # 4 - Task
 
     cv.waitKey(0)
     cv.destroyAllWindows()
@@ -125,6 +154,10 @@ def get_gradient_angle(x, y):
                 return 3
             elif tg >= 2.414:
                 return 4
+
+
+
+
 
 
 
