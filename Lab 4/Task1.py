@@ -1,7 +1,8 @@
 import cv2 as cv
 import numpy as np
-# Путь, размерность гауссовского ядра, среднеквадратичное отклонение
-def canny(path, ksize, sigma):
+# Путь, размерность гауссовского ядра, среднеквадратичное отклонение,
+# делители для вычисления значений порогов
+def canny(path, ksize, sigma, divs):
 
     orig_image = cv.imread(path)
 
@@ -59,7 +60,7 @@ def canny(path, ksize, sigma):
     cv.imshow('Values of angles', gradient_angle_matrix.astype(np.uint8))
     print('Значение углов градиентов:\n', gradient_angle_matrix)
 
-    # 3 - TASK
+    # 3 - TASK подавление не максимумов
 
     non_max_suppression = orig_image.copy()
     for i in range(orig_image.shape[0]):
@@ -91,7 +92,37 @@ def canny(path, ksize, sigma):
     cv.imshow('Non Max Suppression', non_max_suppression)
 
 
-    # 4 - Task
+    # 4 - Task пороговая фильтрация
+
+    low_level = max_gradient // divs[0]
+    high_level = max_gradient // divs[1]
+
+
+    porog_filtration = np.zeros(orig_image.shape)
+    for i in range(orig_image.shape[0]):
+        for j in range(orig_image.shape[1]):
+            gradient = gradient_value_matrix[i][j]
+            # потенциальная граница изображения?
+            if (non_max_suppression[i][j] == 255).any():
+                # градиент находится внутри интервала?
+                if (gradient >= low_level and gradient <= high_level):
+                    flag = False
+                    # проверка пикселя с максимальной длиной градиента среди соседей
+                    for k in range(-1, 1):
+                        for l in range(-1, 1):
+                            if (flag):
+                                break
+                            # поиск границы внутри интервала верхнего и нижнего порога
+                            if (non_max_suppression[i + k][j + l] == 255).any():
+                                flag = True
+                                break
+                    if (flag):
+                        porog_filtration[i][j] = 255
+                # если значение градиента выше - верхней границы, то пиксель точно граница
+                elif (gradient > high_level):
+                    porog_filtration[i][j] = 255
+    cv.imshow('Porog Filtration', porog_filtration)
+
 
     cv.waitKey(0)
     cv.destroyAllWindows()
@@ -160,5 +191,8 @@ def get_gradient_angle(x, y):
 
 
 
+# canny('images/img.png', 3, 3, (25, 10)) # very good
+# canny('images/img.png', 15, 10, (25, 10)) # > средн. кв. откл. < границы
+# canny('images/img.png', 7, 7, (10, 1)) # PoroSad result
+canny('images/img.png', 3, 10, (20, 7))
 
-canny('images/img.png', 3, 3)
