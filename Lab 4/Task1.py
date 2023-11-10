@@ -193,6 +193,6 @@ def get_gradient_angle(x, y):
 
 # canny('images/img.png', 3, 3, (25, 10)) # very good
 # canny('images/img.png', 15, 10, (25, 10)) # > средн. кв. откл. < границы
-# canny('images/img.png', 7, 7, (10, 1)) # PoroSad result
-canny('images/img.png', 3, 10, (20, 7))
+canny('images/img.png', 7, 7, (10, 1)) # PoroSad result
+# canny('images/img.png', 3, 10, (20, 7))
 
